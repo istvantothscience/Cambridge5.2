@@ -211,20 +211,35 @@ export const Slide6TaskOrderProcess: React.FC<Slide6TaskOrderProcessProps> = ({
               className="w-full py-4 rounded-2xl bg-emerald-700 hover:bg-emerald-800 text-white font-heading font-bold text-base shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.01]"
             >
               <CheckCircle2 size={18} />
-              <span>Check My Process Order (+4 Pts)</span>
+              <span>Sorrend ellenőrzése / Check Process Order</span>
             </button>
           ) : (
-            <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-300 text-emerald-950 flex items-center justify-between animate-fade-in">
-              <div className="flex items-center gap-2 text-sm font-bold">
-                <Sparkles className="text-amber-600" />
-                <span>Sequence checked! You earned +{scoreEarned} Gardener Points!</span>
+            <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-300 text-emerald-950 space-y-3 animate-fade-in">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div className="flex items-center gap-2 text-sm font-bold">
+                  <Sparkles className="text-amber-600 shrink-0" />
+                  <span>
+                    {scoreEarned === 1
+                      ? '✓ Sikerült! Mind a 4 lépés helyes sorrendben van. 1 pont megszerezve a 3. feladatra 🌱'
+                      : 'Nem sikerült! Nézd meg a pirossal jelölt lépéseket és próbáld újra!'}
+                  </span>
+                </div>
               </div>
-              <button
-                onClick={handleReset}
-                className="px-3 py-1 bg-white border border-emerald-300 rounded-lg text-xs font-bold hover:bg-emerald-100 cursor-pointer"
-              >
-                Try Again
-              </button>
+              <div className="pt-2 flex justify-between gap-2 border-t border-emerald-200">
+                <button
+                  onClick={handleReset}
+                  className="px-3 py-1.5 bg-white border border-emerald-300 rounded-lg text-xs font-bold hover:bg-emerald-100 cursor-pointer text-slate-700"
+                >
+                  Újrapróbálás / Try Again
+                </button>
+                <button
+                  onClick={() => realtime.nextSlide()}
+                  className="px-4 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold flex items-center gap-1 shadow-xs cursor-pointer"
+                >
+                  <span>Következő dia: Termés és mag</span>
+                  <span>→</span>
+                </button>
+              </div>
             </div>
           )}
         </div>

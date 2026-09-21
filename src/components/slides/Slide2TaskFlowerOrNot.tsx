@@ -239,14 +239,41 @@ export const Slide2TaskFlowerOrNot: React.FC<Slide2TaskFlowerOrNotProps> = ({
 
           {/* Completion Celebration */}
           {isFinished && (
-            <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-100 to-amber-100 border border-emerald-300 text-center space-y-2">
+            <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-100 to-amber-100 border border-emerald-300 text-center space-y-3 animate-fade-in">
               <Award className="mx-auto text-amber-600" size={32} />
               <div className="font-heading font-bold text-lg text-emerald-950">
-                Task 1 Completed! You scored {correctCount} / {TASK_1_PLANTS.length} Gardener Points
+                1. Feladat befejezve! Eredmény: {correctCount} / {TASK_1_PLANTS.length} helyes
               </div>
-              <p className="text-xs text-slate-600">
-                Excellent botanist work! Ready for when the teacher advances to Flower Anatomy.
+              <p className="text-sm font-semibold text-emerald-800">
+                {correctCount >= 6 ? (
+                  <span className="inline-flex items-center gap-1 bg-emerald-100 text-emerald-900 px-3 py-1 rounded-full border border-emerald-300">
+                    ✓ Sikerült! 1 pont megszerezve az 1. feladatra 🌱
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1 bg-amber-100 text-amber-900 px-3 py-1 rounded-full border border-amber-300">
+                    Nem sikerült (legalább 6 helyes válasz szükséges a ponthoz). Próbáld újra!
+                  </span>
+                )}
               </p>
+              <div className="pt-2 flex justify-center gap-3">
+                <button
+                  onClick={() => {
+                    setUserAnswers({});
+                    setCurrentIndex(0);
+                    setFeedback(null);
+                  }}
+                  className="px-4 py-2 rounded-xl bg-white border border-emerald-300 text-emerald-900 text-xs font-bold hover:bg-emerald-50 cursor-pointer transition-all"
+                >
+                  Újrapróbálás
+                </button>
+                <button
+                  onClick={() => realtime.nextSlide()}
+                  className="px-5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer transition-all"
+                >
+                  <span>Következő dia: A virág anatómiája</span>
+                  <span>→</span>
+                </button>
+              </div>
             </div>
           )}
         </div>

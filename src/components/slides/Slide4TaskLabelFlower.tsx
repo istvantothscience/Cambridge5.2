@@ -283,23 +283,45 @@ export const Slide4TaskLabelFlower: React.FC<Slide4TaskLabelFlowerProps> = ({
               <div className="pt-3 border-t border-slate-100 space-y-3 animate-fade-in">
                 <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-300 text-center space-y-1">
                   <div className="font-heading font-bold text-emerald-950 text-base">
-                    Score: {FLOWER_PARTS.filter((p) => placements[p.id] === p.name).length} / 7
+                    Eredmény: {FLOWER_PARTS.filter((p) => placements[p.id] === p.name).length} / 7 helyes címke
                   </div>
-                  {elapsedSeconds <= 45 && FLOWER_PARTS.filter((p) => placements[p.id] === p.name).length >= 5 && (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-200 text-amber-950 border border-amber-400">
-                      ⚡ +2 Speed Bonus Earned!
-                    </span>
-                  )}
+                  <div className="pt-1">
+                    {FLOWER_PARTS.filter((p) => placements[p.id] === p.name).length >= 5 ? (
+                      <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-900 border border-emerald-300">
+                        ✓ Sikerült! 1 pont megszerezve a 2. feladatra 🌱
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                        Nem sikerült (legalább 5 helyes címke szükséges a ponthoz).
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 <div className="text-[11px] text-slate-600 space-y-1">
-                  <strong>Correct Key:</strong>
+                  <strong>Helyes megoldókulcs / Correct Key:</strong>
                   {FLOWER_PARTS.map((p) => (
                     <div key={p.id} className="flex justify-between border-b border-slate-100 py-0.5">
                       <span className="text-slate-500">{p.systemName}:</span>
                       <span className="font-bold text-emerald-900">{p.name}</span>
                     </div>
                   ))}
+                </div>
+
+                <div className="pt-2 flex justify-between gap-2">
+                  <button
+                    onClick={handleReset}
+                    className="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs font-bold cursor-pointer transition-all"
+                  >
+                    Újrapróbálás
+                  </button>
+                  <button
+                    onClick={() => realtime.nextSlide()}
+                    className="px-4 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold flex items-center gap-1 shadow-xs cursor-pointer transition-all"
+                  >
+                    <span>Következő dia: Beporzás</span>
+                    <span>→</span>
+                  </button>
                 </div>
               </div>
             )}

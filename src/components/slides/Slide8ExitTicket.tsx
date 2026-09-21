@@ -185,17 +185,43 @@ export const Slide8ExitTicket: React.FC<Slide8ExitTicketProps> = ({
               }`}
             >
               <CheckCircle2 size={18} />
-              <span>Submit My Exit Ticket (+4 Pts)</span>
+              <span>Kilépőcédula ellenőrzése / Check Exit Ticket</span>
             </button>
           ) : (
-            <div className="p-5 bg-gradient-to-r from-emerald-100 to-amber-100 rounded-3xl border border-emerald-300 text-center space-y-2 animate-fade-in">
+            <div className="p-6 bg-gradient-to-r from-emerald-100 to-amber-100 rounded-3xl border border-emerald-300 text-center space-y-3 animate-fade-in">
               <Sparkles className="mx-auto text-amber-600" size={32} />
               <div className="font-heading font-bold text-xl text-emerald-950">
-                Exit Ticket Completed!
+                5. Feladat (Kilépőcédula) befejezve!
               </div>
-              <p className="text-xs text-slate-600">
-                The teacher will now display the final summary and your total Gardener Points!
-              </p>
+              <div className="text-sm font-semibold">
+                {EXIT_TICKET_QUESTIONS.filter((q) => selectedAnswers[q.id] === q.correctIndex).length >= 3 ? (
+                  <span className="inline-flex items-center gap-1 text-emerald-900 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300">
+                    ✓ Sikerült! {EXIT_TICKET_QUESTIONS.filter((q) => selectedAnswers[q.id] === q.correctIndex).length}/4 kérdés helyes. 1 pont megszerezve az 5. feladatra 🌱
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1 text-amber-900 bg-amber-100 px-3 py-1 rounded-full border border-amber-300">
+                    Nem sikerült! {EXIT_TICKET_QUESTIONS.filter((q) => selectedAnswers[q.id] === q.correctIndex).length}/4 helyes (legalább 3 szükséges a ponthoz).
+                  </span>
+                )}
+              </div>
+              <div className="pt-2 flex justify-center gap-3">
+                <button
+                  onClick={() => {
+                    setIsSubmitted(false);
+                    setSelectedAnswers({});
+                  }}
+                  className="px-4 py-2 bg-white border border-emerald-300 rounded-xl text-xs font-bold text-slate-700 hover:bg-emerald-50 cursor-pointer"
+                >
+                  Újrapróbálás
+                </button>
+                <button
+                  onClick={() => realtime.nextSlide()}
+                  className="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer transition-all"
+                >
+                  <span>Összesített pontszám és oklevél megtekintése</span>
+                  <span>→</span>
+                </button>
+              </div>
             </div>
           )}
         </div>

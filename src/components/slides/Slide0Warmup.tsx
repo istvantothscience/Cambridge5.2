@@ -121,60 +121,29 @@ export const Slide0Warmup: React.FC<Slide0WarmupProps> = ({
       </div>
 
       {/* Confirmation & Status info for student */}
-      {!isTeacher && selectedOption && (
-        <div className="p-4 rounded-xl bg-emerald-100/70 border border-emerald-300 text-emerald-900 flex items-center justify-between text-sm animate-fade-in">
-          <div className="flex items-center gap-2">
-            <span className="text-xl">🌱</span>
-            <span>
-              <strong>Thank you, {currentStudent?.name || 'Gardener'}!</strong> Your vote is locked in. Watch the teacher's screen to see what the whole class voted.
-            </span>
-          </div>
-        </div>
-      )}
-
-      {/* Teacher Live Stats Card */}
-      {isTeacher && (
-        <div className="bg-white rounded-2xl border border-emerald-200 p-5 shadow-xs space-y-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <BarChart3 className="text-emerald-700" size={20} />
-              <h3 className="font-heading font-bold text-lg text-slate-800">
-                Live Class Warm-up Poll Results
-              </h3>
-            </div>
-            <div className="flex items-center gap-2 text-xs font-medium text-slate-600 bg-slate-100 px-3 py-1 rounded-full">
-              <Users size={14} />
-              {totalVotes} of {students.length} student{students.length === 1 ? '' : 's'} voted
+      {selectedOption && (
+        <div className="p-5 rounded-2xl bg-emerald-50 border-2 border-emerald-300 text-emerald-950 space-y-3 animate-fade-in">
+          <div className="flex items-start gap-3">
+            <span className="text-2xl">🌱</span>
+            <div className="space-y-1">
+              <strong className="block font-heading font-bold text-base text-emerald-900">
+                {selectedOption === 'no'
+                  ? '🎯 Helyes meglátás! / Spot on!'
+                  : '🔍 Érdekes kérdés! / Good thinking!'}
+              </strong>
+              <p className="text-sm text-slate-700 leading-relaxed">
+                A tudomány válasza: <strong>NEM minden növény hoz virágot!</strong> Bár a virágos növények (pl. rózsa, almafa, napraforgó) nagyon elterjedtek, léteznek nem virágos növények is (pl. fenyők, mohák, páfrányok), amelyek virág nélkül szaporodnak.
+              </p>
             </div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
-            {WARMUP_OPTIONS.map((opt) => (
-              <div key={opt.id} className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="font-semibold text-sm text-slate-800 flex items-center gap-1.5">
-                    <span>{opt.icon}</span> {opt.id.toUpperCase()}
-                  </span>
-                  <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
-                    {votesCount[opt.id]}
-                  </span>
-                </div>
-                {votersByChoice[opt.id].length > 0 ? (
-                  <div className="flex flex-wrap gap-1">
-                    {votersByChoice[opt.id].map((name, i) => (
-                      <span
-                        key={i}
-                        className="text-[11px] px-2 py-0.5 bg-white border border-slate-200 rounded-md text-slate-700"
-                      >
-                        {name}
-                      </span>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-xs text-slate-400 italic">No votes yet</p>
-                )}
-              </div>
-            ))}
+          <div className="pt-2 flex justify-end">
+            <button
+              onClick={() => realtime.nextSlide()}
+              className="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-heading font-bold text-xs flex items-center gap-2 shadow-xs cursor-pointer transition-all"
+            >
+              <span>Következő dia: Nem virágos növények</span>
+              <span>→</span>
+            </button>
           </div>
         </div>
       )}

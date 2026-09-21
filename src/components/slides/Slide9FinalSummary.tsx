@@ -86,40 +86,61 @@ export const Slide9FinalSummary: React.FC<Slide9FinalSummaryProps> = ({
           {/* Activity Breakdown */}
           <div className="pt-4 border-t border-slate-100 max-w-lg mx-auto text-left space-y-2">
             <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-              Feladatok eredménye:
+              Feladatok eredménye (összesen max. 5 pont):
             </h3>
-            <div className="space-y-1 text-xs">
-              <div className="flex justify-between p-2 rounded-xl bg-slate-50">
-                <span className="text-slate-700">🌱 1. feladat: Virágos növények</span>
-                <span className="font-bold text-emerald-800">
-                  {currentStudent.answers['slide-2-task-flower-or-not']?.scoreEarned || 0} / 1 pont
+            <div className="space-y-1.5 text-xs">
+              <div className="flex justify-between items-center p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                <span className="text-slate-700 font-medium">🌱 1. feladat: Virágos növények</span>
+                <span className={`font-bold px-2 py-0.5 rounded-md ${currentStudent.answers['slide-2-task-flower-or-not']?.scoreEarned ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600'}`}>
+                  {currentStudent.answers['slide-2-task-flower-or-not']?.scoreEarned ? '✓ 1 / 1 pont' : '✗ 0 / 1 pont'}
                 </span>
               </div>
-              <div className="flex justify-between p-2 rounded-xl bg-slate-50">
-                <span className="text-slate-700">🏷️ 2. feladat: A virág részei</span>
-                <span className="font-bold text-emerald-800">
-                  {currentStudent.answers['slide-4-task-label-flower']?.scoreEarned || 0} / 1 pont
+              <div className="flex justify-between items-center p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                <span className="text-slate-700 font-medium">🏷️ 2. feladat: A virág részei</span>
+                <span className={`font-bold px-2 py-0.5 rounded-md ${currentStudent.answers['slide-4-task-label-flower']?.scoreEarned ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600'}`}>
+                  {currentStudent.answers['slide-4-task-label-flower']?.scoreEarned ? '✓ 1 / 1 pont' : '✗ 0 / 1 pont'}
                 </span>
               </div>
-              <div className="flex justify-between p-2 rounded-xl bg-slate-50">
-                <span className="text-slate-700">🔢 3. feladat: Szaporodási folyamat sorrendje</span>
-                <span className="font-bold text-emerald-800">
-                  {currentStudent.answers['slide-6-task-order-process']?.scoreEarned || 0} / 1 pont
+              <div className="flex justify-between items-center p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                <span className="text-slate-700 font-medium">🔢 3. feladat: Szaporodási folyamat sorrendje</span>
+                <span className={`font-bold px-2 py-0.5 rounded-md ${currentStudent.answers['slide-6-task-order-process']?.scoreEarned ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600'}`}>
+                  {currentStudent.answers['slide-6-task-order-process']?.scoreEarned ? '✓ 1 / 1 pont' : '✗ 0 / 1 pont'}
                 </span>
               </div>
-              <div className="flex justify-between p-2 rounded-xl bg-slate-50">
-                <span className="text-slate-700">🍎 4. feladat: Termés és mag párosítás</span>
-                <span className="font-bold text-emerald-800">
-                  {currentStudent.answers['slide-7-task-fruit-matching']?.scoreEarned || 0} / 1 pont
+              <div className="flex justify-between items-center p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                <span className="text-slate-700 font-medium">🍎 4. feladat: Termés és mag párosítás</span>
+                <span className={`font-bold px-2 py-0.5 rounded-md ${currentStudent.answers['slide-7-task-fruit-matching']?.scoreEarned ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600'}`}>
+                  {currentStudent.answers['slide-7-task-fruit-matching']?.scoreEarned ? '✓ 1 / 1 pont' : '✗ 0 / 1 pont'}
                 </span>
               </div>
-              <div className="flex justify-between p-2 rounded-xl bg-slate-50">
-                <span className="text-slate-700">🎓 5. feladat: Kilépőcédula ellenőrzés</span>
-                <span className="font-bold text-emerald-800">
-                  {currentStudent.answers['slide-8-exit-ticket']?.scoreEarned || 0} / 1 pont
+              <div className="flex justify-between items-center p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                <span className="text-slate-700 font-medium">🎓 5. feladat: Kilépőcédula ellenőrzés</span>
+                <span className={`font-bold px-2 py-0.5 rounded-md ${currentStudent.answers['slide-8-exit-ticket']?.scoreEarned ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600'}`}>
+                  {currentStudent.answers['slide-8-exit-ticket']?.scoreEarned ? '✓ 1 / 1 pont' : '✗ 0 / 1 pont'}
                 </span>
               </div>
             </div>
+          </div>
+
+          {/* Action buttons */}
+          <div className="pt-4 border-t border-slate-100 flex flex-wrap justify-center gap-3">
+            <button
+              onClick={() => realtime.setSlide(0)}
+              className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-heading font-bold text-xs rounded-xl cursor-pointer transition-all"
+            >
+              Diák áttekintése az elejétől
+            </button>
+            <button
+              onClick={() => {
+                if (confirm('Biztosan újra szeretnéd kezdeni a prezentációt? Minden válasz és pont törlődik.')) {
+                  realtime.resetSession();
+                }
+              }}
+              className="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-heading font-bold text-xs rounded-xl flex items-center gap-1.5 cursor-pointer shadow-xs transition-all"
+            >
+              <RotateCcw size={14} />
+              <span>Prezentáció újrakezdése</span>
+            </button>
           </div>
         </div>
       )}

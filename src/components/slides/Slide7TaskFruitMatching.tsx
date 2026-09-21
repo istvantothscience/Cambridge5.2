@@ -237,26 +237,48 @@ export const Slide7TaskFruitMatching: React.FC<Slide7TaskFruitMatchingProps> = (
                 }`}
               >
                 <CheckCircle2 size={18} />
-                <span>Check All 7 Fruit &amp; Seed Matches (+7 Pts)</span>
+                <span>Párosítások ellenőrzése / Check Fruit Matches</span>
               </button>
               {!allAssigned && (
                 <p className="text-xs text-slate-400 text-center mt-2">
-                  Match all 7 plants to a category before checking.
+                  Párosítsd mind a 7 növényt az ellenőrzés előtt! / Match all 7 plants before checking.
                 </p>
               )}
             </div>
           ) : (
             <div className="p-5 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-950 space-y-3 animate-fade-in">
-              <div className="flex items-center justify-between">
-                <div className="font-heading font-bold text-lg">
-                  Score: {SEED_FRUIT_ITEMS.filter((i) => matches[i.id] === i.fruitCategory).length} / 7 Correct!
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <div className="font-heading font-bold text-lg">
+                    Eredmény: {SEED_FRUIT_ITEMS.filter((i) => matches[i.id] === i.fruitCategory).length} / 7 helyes
+                  </div>
+                  <div className="pt-0.5">
+                    {SEED_FRUIT_ITEMS.filter((i) => matches[i.id] === i.fruitCategory).length >= 5 ? (
+                      <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full border border-emerald-300">
+                        ✓ Sikerült! 1 pont megszerezve a 4. feladatra 🌱
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 text-xs font-bold text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded-full border border-amber-300">
+                        Nem sikerült (legalább 5 helyes szükséges a ponthoz).
+                      </span>
+                    )}
+                  </div>
                 </div>
-                <button
-                  onClick={handleReset}
-                  className="px-3 py-1 bg-white border border-emerald-300 rounded-lg text-xs font-bold hover:bg-emerald-100 cursor-pointer"
-                >
-                  Try Again
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={handleReset}
+                    className="px-3 py-1.5 bg-white border border-emerald-300 rounded-lg text-xs font-bold hover:bg-emerald-100 cursor-pointer text-slate-700"
+                  >
+                    Újrapróbálás
+                  </button>
+                  <button
+                    onClick={() => realtime.nextSlide()}
+                    className="px-4 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold flex items-center gap-1 shadow-xs cursor-pointer"
+                  >
+                    <span>Következő: Kilépőcédula</span>
+                    <span>→</span>
+                  </button>
+                </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">

@@ -1,6 +1,6 @@
 {
   "name": "Our Living World - Science Lesson & Point Tracker",
-  "description": "Cambridge Primary Science (Stage 5–6) gamified lesson with real-time synced teacher and student views, interactive plant/flower activities, and Gardener Points tracking.",
+  "description": "Önálló interaktív Cambridge Science (Stage 5–6) tanóra és prezentáció beépített feladatokkal, azonnali visszajelzéssel és pontszámítással.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
